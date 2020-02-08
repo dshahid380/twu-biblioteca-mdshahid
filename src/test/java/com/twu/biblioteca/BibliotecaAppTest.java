@@ -14,6 +14,8 @@ class BibliotecaAppTest {
     public void testShouldPrintTheWelcomeMessage() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
+        String input = "1";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
         BibliotecaApp.main(new String[]{});
         verify(printStream).println("Welcome to Biblioteca. You one-stop-shop for great book titles in Bangalore!");
     }
@@ -22,6 +24,8 @@ class BibliotecaAppTest {
     public void testShouldBeAbleToPrintAllAvailableBooks() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
+        String input = "1";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
@@ -34,6 +38,8 @@ class BibliotecaAppTest {
     void testShouldPrintAllBooksWithTheirAuthorsNameAndYear() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
+        String input = "1";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
@@ -62,5 +68,17 @@ class BibliotecaAppTest {
         verify(printStream).print("Author2");
         verify(printStream).print("1998");
 
+    }
+
+    @Test
+    void testShouldPrintInvalidOptionIfUserChooseInvalidOption() {
+        PrintStream printStream = mock(PrintStream.class);
+        System.setOut(printStream);
+
+        String input = "2";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        BibliotecaApp.main(new String[]{});
+
+        verify(printStream).println("Please select a valid option!");
     }
 }

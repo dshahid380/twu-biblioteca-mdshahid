@@ -17,6 +17,8 @@ public class BibliotecaApp {
 
         if(bibliotecaApp.getUserInput().equals("1"))
             bibliotecaApp.displayAllBooks();
+        else
+            System.out.println("Please select a valid option!");
 
     }
 
@@ -38,12 +40,13 @@ public class BibliotecaApp {
     private void showMenu(){
         for(Map.Entry<Integer, String> entry : menuList.entrySet())
             System.out.print(entry.getKey() + ". " + entry.getValue());
-        System.out.println("\nPlease choose option : ");
+        System.out.println("\nPlease choose an option : ");
     }
 
     public String getUserInput(){
         Scanner scanner = new Scanner(System.in);
-        return scanner.next();
+        String s = scanner.nextLine();
+        return s;
     }
 
 }

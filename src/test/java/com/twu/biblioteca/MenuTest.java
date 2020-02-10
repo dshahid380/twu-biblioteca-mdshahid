@@ -14,8 +14,8 @@ class MenuTest {
         List<Book> bookList = List.of(new Book("Book1", "Author1", "1997"),
                 new Book("Book2", "Author2", "1998"));
         List<String> menuList = List.of("List of Books", "Quit");
-        BookShelf bookShelf = new BookShelf(bookList);
-        menu = new Menu(bookShelf, menuList);
+        Library library = new Library(bookList);
+        menu = new Menu(library, menuList);
         printStream = mock(PrintStream.class);
         System.setOut(printStream);
     }

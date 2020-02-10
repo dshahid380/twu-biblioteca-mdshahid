@@ -8,7 +8,7 @@ import java.util.List;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class BookShelfTest {
+class LibraryTest {
     @Test
     void testShouldDisplayBooksWithItsAuthorAndYear() {
         PrintStream printStream = mock(PrintStream.class);
@@ -16,8 +16,8 @@ class BookShelfTest {
 
         List<Book> bookList = List.of(new Book("Book1", "Author1", "1997"),
                 new Book("Book2", "Author2", "1998"));
-        BookShelf bookShelf = new BookShelf(bookList);
-        bookShelf.displayAllBooks();
+        Library library = new Library(bookList);
+        library.displayAllBooks();
         verify(printStream).print("Book1");
         verify(printStream).print("Author1");
         verify(printStream).print("1997");

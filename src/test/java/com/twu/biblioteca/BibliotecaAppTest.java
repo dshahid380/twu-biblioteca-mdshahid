@@ -13,8 +13,7 @@ class BibliotecaAppTest {
     public void testShouldPrintTheWelcomeMessage() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
-        System.setIn(new ByteArrayInputStream("4".getBytes()));
+        System.setIn(new ByteArrayInputStream("1\n2".getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
@@ -25,7 +24,7 @@ class BibliotecaAppTest {
     public void testShouldBeAbleToPrintAllAvailableBooks() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("1\n4".getBytes()));
+        System.setIn(new ByteArrayInputStream("1\n2".getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
@@ -39,7 +38,7 @@ class BibliotecaAppTest {
     void testShouldPrintAllBooksWithTheirAuthorsNameAndYear() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("1\n4".getBytes()));
+        System.setIn(new ByteArrayInputStream("1\n2".getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
@@ -56,7 +55,7 @@ class BibliotecaAppTest {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
 
-        System.setIn(new ByteArrayInputStream("1\n4".getBytes()));
+        System.setIn(new ByteArrayInputStream("1\n2".getBytes()));
         BibliotecaApp.main(new String[]{});
 
         verify(printStream, times(2)).print("1. List of Books");
@@ -72,7 +71,7 @@ class BibliotecaAppTest {
     void testShouldPrintInvalidOptionIfUserChooseInvalidOption() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("6\n4".getBytes()));
+        System.setIn(new ByteArrayInputStream("6\n2".getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
@@ -84,7 +83,7 @@ class BibliotecaAppTest {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
 
-        System.setIn(new ByteArrayInputStream("4".getBytes()));
+        System.setIn(new ByteArrayInputStream("2".getBytes()));
 
         BibliotecaApp.main(new String[]{});
 

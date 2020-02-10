@@ -1,16 +1,14 @@
 package com.twu.biblioteca;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Menu {
     private List<String> menuList;
-    private BookShelf bookShelf;
+    private Library library;
 
-    Menu(BookShelf bookShelf, List<String> menuList) {
+    Menu(Library library, List<String> menuList) {
         this.menuList = menuList;
-        this.bookShelf = bookShelf;
+        this.library = library;
     }
 
     public void show() {
@@ -21,7 +19,7 @@ public class Menu {
 
     public void performOperation(int input) {
         if (input == 1)
-            bookShelf.displayAllBooks();
+            library.displayAllBooks();
         else if (input == 2)
             System.out.println("Thank you!");
         else

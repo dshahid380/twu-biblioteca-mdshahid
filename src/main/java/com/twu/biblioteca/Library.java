@@ -2,10 +2,10 @@ package com.twu.biblioteca;
 
 import java.util.List;
 
-public class BookShelf {
+public class Library {
     private List<Book> bookList;
 
-    public BookShelf(List<Book> bookList) {
+    public Library(List<Book> bookList) {
         this.bookList = bookList;
     }
 

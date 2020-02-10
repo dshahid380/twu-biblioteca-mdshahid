@@ -21,8 +21,8 @@ public class BibliotecaApp {
     }
 
     public void start(){
-        BookShelf bookShelf = new BookShelf(this.bookList);
-        Menu menu = new Menu(bookShelf,this.menuList);
+        Library library = new Library(this.bookList);
+        Menu menu = new Menu(library,this.menuList);
         Scanner scanner = new Scanner(System.in);
         this.printWelcomeMessage();
         do {

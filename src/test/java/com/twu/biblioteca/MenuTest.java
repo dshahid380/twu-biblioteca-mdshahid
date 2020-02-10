@@ -49,4 +49,5 @@ class MenuTest {
         menu.performOperation(6);
         verify(printStream,times(1)).println("Please select a valid option!");
     }
+
 }

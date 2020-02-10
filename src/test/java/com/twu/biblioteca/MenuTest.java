@@ -40,4 +40,13 @@ class MenuTest {
         menu.performOperation(4);
         verify(printStream,times(1)).println("Thank you!");
     }
+
+    @Test
+    void testShouldPrintAnMessageToUserWhenEnterWrongOption() {
+        Menu menu = new Menu();
+        PrintStream printStream = mock(PrintStream.class);
+        System.setOut(printStream);
+        menu.performOperation(6);
+        verify(printStream,times(1)).println("Please select a valid option!");
+    }
 }

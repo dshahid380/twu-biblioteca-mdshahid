@@ -24,9 +24,11 @@ public class Menu {
 
     public void performOperation(int input) {
         BookShelf bookShelf = new BookShelf();
-        if(input==1)
+        if (input == 1)
             bookShelf.displayAllBooks();
-        else
+        else if (input == 4)
             System.out.println("Thank you!");
+        else
+            System.out.println("Please select a valid option!");
     }
 }

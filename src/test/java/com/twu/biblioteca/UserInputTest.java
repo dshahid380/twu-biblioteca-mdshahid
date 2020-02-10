@@ -73,7 +73,7 @@ class UserInputTest {
 
     @Test
     @ExpectSystemExit
-    void testShouldPrintAnMessageToUserWhenUserCheckOutABook() {
+    void testShouldNotifyWithAnMessageToUserWhenUserCheckOutABook() {
         System.setIn(new ByteArrayInputStream("2".getBytes()));
         System.setIn(new ByteArrayInputStream("Book1".getBytes()));
         System.setIn(new ByteArrayInputStream("Author1".getBytes()));
@@ -81,6 +81,18 @@ class UserInputTest {
         System.setIn(new ByteArrayInputStream("3".getBytes()));
         userInput.readInput();
         verify(printStream, times(1)).println("Thank you! Enjoy the Book");
+    }
+
+    @Test
+    @ExpectSystemExit
+    void testShouldNotifyWithAnMessageToUserWhenUserWantToCheckOutButBookNotAvailable() {
+        System.setIn(new ByteArrayInputStream("2".getBytes()));
+        System.setIn(new ByteArrayInputStream("Book4".getBytes()));
+        System.setIn(new ByteArrayInputStream("Author4".getBytes()));
+        System.setIn(new ByteArrayInputStream("1997".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
+        userInput.readInput();
+        verify(printStream, times(1)).println("Sorry, that book is not available");
     }
 
 }

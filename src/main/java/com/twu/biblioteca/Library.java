@@ -28,9 +28,10 @@ public class Library {
             if (bookList.get(i).equals(book)) {
                 this.checkOutList.add(book);
                 this.bookList.remove(i);
-                break;
+                return;
             }
         }
+        System.out.println("Sorry, that book is not available");
     }
 
 }

@@ -23,19 +23,8 @@ public class Menu {
 
 
     public void performOperation(int input) {
-        if(input!=4 && input!=1){
-            System.out.println("Please select a valid option!");
-            return;
-        }
         BookShelf bookShelf = new BookShelf();
-        switch (input){
-            case optionOne :
-                bookShelf.displayAllBooks();
-                break;
-            case optionFour :
-                System.out.println("Thank you!");
-                break;
-
-        }
+        if(input==1)
+            bookShelf.displayAllBooks();
     }
 }

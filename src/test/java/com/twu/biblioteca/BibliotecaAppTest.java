@@ -107,15 +107,31 @@ class BibliotecaAppTest {
     void testShouldCheckOutABookFromLibraryWhenUserCheckOut() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
-        String option1 = "3";
-        String bookName = "Book1";
-        String bookAuthor = "Author1";
-        String bookYear = "1997";
-        String inputStream = option1 + "\n" + bookName + "\n" + bookAuthor + "\n" + bookYear;
-        System.setIn(new ByteArrayInputStream(inputStream.getBytes()));
+        System.setIn(new ByteArrayInputStream("2".getBytes()));
+        System.setIn(new ByteArrayInputStream("Book1".getBytes()));
+        System.setIn(new ByteArrayInputStream("Author1".getBytes()));
+        System.setIn(new ByteArrayInputStream("1997".getBytes()));
+        System.setIn(new ByteArrayInputStream("1".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
 
         BibliotecaApp.main(new String[]{});
         verify(printStream, times(0)).print("Book1");
         verify(printStream, times(1)).print("Book2");
+    }
+
+    @Test
+    @ExpectSystemExit
+    void testShouldPrintAnMessageToUserWhenUserCheckOutABook() {
+        PrintStream printStream = mock(PrintStream.class);
+        System.setOut(printStream);
+        System.setIn(new ByteArrayInputStream("2".getBytes()));
+        System.setIn(new ByteArrayInputStream("Book1".getBytes()));
+        System.setIn(new ByteArrayInputStream("Author1".getBytes()));
+        System.setIn(new ByteArrayInputStream("1997".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
+
+        BibliotecaApp.main(new String[]{});
+
+        verify(printStream, times(1)).println("Thank you! Enjoy the Book");
     }
 }

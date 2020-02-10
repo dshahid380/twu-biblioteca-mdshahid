@@ -30,6 +30,7 @@ public class UserInput {
                 String bookYear = scanner.next();
                 Book book = new Book(bookName, bookAuthor, bookYear);
                 this.library.checkOut(book);
+                System.out.println("Thank you! Enjoy the Book");
                 break;
             case 3:
                 System.out.println("Thank you!");

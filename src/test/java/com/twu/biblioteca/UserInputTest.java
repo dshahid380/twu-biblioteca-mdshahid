@@ -40,7 +40,7 @@ class UserInputTest {
 
     @Test
     @ExpectSystemExit
-    void testShouldPrintAnMessageToUserForQuit() {
+    void testShouldPrintAnMessageToUserWhenEnterWrongOption() {
         System.setIn(new ByteArrayInputStream("6".getBytes()));
         System.setIn(new ByteArrayInputStream("3".getBytes()));
         userInput.readInput();
@@ -49,10 +49,38 @@ class UserInputTest {
 
     @Test
     @ExpectSystemExit
-    void testShouldPrintAnMessageToUserWhenEnterWrongOption() {
+    void testShouldPrintAnMessageToUserForQuit() {
         System.setIn(new ByteArrayInputStream("3".getBytes()));
         userInput.readInput();
         verify(printStream, times(1)).println("Thank you!");
+    }
+
+    @Test
+    @ExpectSystemExit
+    void testShouldAllowUserToCheckOutBook() {
+        System.setIn(new ByteArrayInputStream("2".getBytes()));
+        System.setIn(new ByteArrayInputStream("Book1".getBytes()));
+        System.setIn(new ByteArrayInputStream("Author1".getBytes()));
+        System.setIn(new ByteArrayInputStream("1997".getBytes()));
+        System.setIn(new ByteArrayInputStream("1".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
+
+        userInput.readInput();
+
+        verify(printStream, times(0)).print("Book1");
+        verify(printStream, times(1)).print("Book2");
+    }
+
+    @Test
+    @ExpectSystemExit
+    void testShouldPrintAnMessageToUserWhenUserCheckOutABook() {
+        System.setIn(new ByteArrayInputStream("2".getBytes()));
+        System.setIn(new ByteArrayInputStream("Book1".getBytes()));
+        System.setIn(new ByteArrayInputStream("Author1".getBytes()));
+        System.setIn(new ByteArrayInputStream("1997".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
+        userInput.readInput();
+        verify(printStream, times(1)).println("Thank you! Enjoy the Book");
     }
 
 }

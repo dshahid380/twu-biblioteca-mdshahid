@@ -16,7 +16,7 @@ public class BibliotecaApp {
 
     public void start() {
         Library library = new Library(this.bookList);
-        Menu menu = new Menu(library, this.menuList);
+        Menu menu = new Menu(this.menuList);
         UserInput userInput = new UserInput(library);
 
         this.printWelcomeMessage();

@@ -23,8 +23,13 @@ public class Library {
     }
 
     public void checkOut(Book book) {
-        this.checkOutList.add(book);
-        this.bookList.remove(0);
+        for(int i=0;i<this.bookList.size(); i++){
+            if(bookList.get(i).equals(book)){
+                this.checkOutList.add(book);
+                this.bookList.remove(i);
+                break;
+            }
+        }
     }
 
 }

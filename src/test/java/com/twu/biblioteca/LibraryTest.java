@@ -20,6 +20,7 @@ class LibraryTest {
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book("Book1", "Author1", "1997"));
         bookList.add(new Book("Book2", "Author2", "1998"));
+        bookList.add(new Book("Book3", "Author3", "1999"));
         List<Book> checkoutList = new ArrayList<>();
         library = new Library(bookList, checkoutList);
     }
@@ -37,13 +38,13 @@ class LibraryTest {
 
     @Test
     void testShouldCheckOutBookFromLibrary() {
-        Book book = new Book("Book1", "Author1", "1997");
+        Book book = new Book("Book2", "Author2", "1998");
 
         library.checkOut(book);
         library.displayAllBooks();
 
-        verify(printStream, times(0)).print("Book1");
-        verify(printStream, times(1)).print("Book2");
+        verify(printStream, times(1)).print("Book1");
+        verify(printStream, times(0)).print("Book2");
     }
 
 }

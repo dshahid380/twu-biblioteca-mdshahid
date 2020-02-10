@@ -7,6 +7,7 @@ public class BibliotecaApp {
     private List<Book> bookList = List.of(new Book("Book1","Author1","1997"),
             new Book("Book2","Author2","1998"));
     private List<String> menuList = List.of("List of Books", "Quit");
+    private List<Book> checkoutList = new ArrayList<>();
 
     private int input;
 
@@ -21,7 +22,7 @@ public class BibliotecaApp {
     }
 
     public void start(){
-        Library library = new Library(this.bookList);
+        Library library = new Library(this.bookList,this.checkoutList);
         Menu menu = new Menu(library,this.menuList);
         Scanner scanner = new Scanner(System.in);
         this.printWelcomeMessage();

@@ -4,9 +4,11 @@ import java.util.List;
 
 public class Library {
     private List<Book> bookList;
+    private List<Book> checkOutList;
 
-    public Library(List<Book> bookList) {
+    public Library(List<Book> bookList, List<Book> checkoutList) {
         this.bookList = bookList;
+        this.checkOutList = checkoutList;
     }
 
     public void displayAllBooks() {
@@ -18,6 +20,11 @@ public class Library {
             System.out.print(book.getYear());
             System.out.println("");
         }
+    }
+
+    public void checkOut(Book book) {
+        this.checkOutList.add(book);
+        this.bookList.remove(0);
     }
 
 }

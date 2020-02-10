@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 import static org.mockito.Mockito.*;
 
@@ -14,7 +15,8 @@ class MenuTest {
         List<Book> bookList = List.of(new Book("Book1", "Author1", "1997"),
                 new Book("Book2", "Author2", "1998"));
         List<String> menuList = List.of("List of Books", "Quit");
-        Library library = new Library(bookList);
+        List<Book> checkoutList = new ArrayList<>();
+        Library library = new Library(bookList, checkoutList);
         menu = new Menu(library, menuList);
         printStream = mock(PrintStream.class);
         System.setOut(printStream);

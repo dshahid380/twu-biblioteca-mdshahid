@@ -15,8 +15,7 @@ class MenuTest {
         List<Book> bookList = List.of(new Book("Book1", "Author1", "1997"),
                 new Book("Book2", "Author2", "1998"));
         List<String> menuList = List.of("List of Books", "Quit");
-        List<Book> checkoutList = new ArrayList<>();
-        Library library = new Library(bookList, checkoutList);
+        Library library = new Library(bookList);
         menu = new Menu(library, menuList);
         printStream = mock(PrintStream.class);
         System.setOut(printStream);
@@ -31,7 +30,7 @@ class MenuTest {
 
     @Test
     void testShouldPrintDetailsOfBooks() {
-        menu.performOperation(1);
+        menu.performOperation(1,null);
         verify(printStream).print("Book1");
         verify(printStream).print("Author1");
         verify(printStream).print("1997");
@@ -42,13 +41,13 @@ class MenuTest {
 
     @Test
     void testShouldPrintAnMessageToUserForQuit() {
-        menu.performOperation(2);
+        menu.performOperation(3,null);
         verify(printStream, times(1)).println("Thank you!");
     }
 
     @Test
     void testShouldPrintAnMessageToUserWhenEnterWrongOption() {
-        menu.performOperation(6);
+        menu.performOperation(6,null);
         verify(printStream, times(1)).println("Please select a valid option!");
     }
 

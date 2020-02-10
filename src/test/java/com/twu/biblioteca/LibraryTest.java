@@ -21,8 +21,7 @@ class LibraryTest {
         bookList.add(new Book("Book1", "Author1", "1997"));
         bookList.add(new Book("Book2", "Author2", "1998"));
         bookList.add(new Book("Book3", "Author3", "1999"));
-        List<Book> checkoutList = new ArrayList<>();
-        library = new Library(bookList, checkoutList);
+        library = new Library(bookList);
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.ginsberg.junit.exit.ExpectSystemExit;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -10,10 +11,12 @@ import static org.mockito.Mockito.*;
 class BibliotecaAppTest {
 
     @Test
+    @ExpectSystemExit
     public void testShouldPrintTheWelcomeMessage() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("1\n2".getBytes()));
+        System.setIn(new ByteArrayInputStream("1".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
@@ -21,10 +24,12 @@ class BibliotecaAppTest {
     }
 
     @Test
+    @ExpectSystemExit
     public void testShouldBeAbleToPrintAllAvailableBooks() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("1\n2".getBytes()));
+        System.setIn(new ByteArrayInputStream("1".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
@@ -35,10 +40,12 @@ class BibliotecaAppTest {
     }
 
     @Test
+    @ExpectSystemExit
     void testShouldPrintAllBooksWithTheirAuthorsNameAndYear() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("1\n2".getBytes()));
+        System.setIn(new ByteArrayInputStream("1".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
@@ -51,11 +58,13 @@ class BibliotecaAppTest {
     }
 
     @Test
+    @ExpectSystemExit
     void testShouldPrintAllBooksDetailsWhenUserSelectListOfBooks() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
 
-        System.setIn(new ByteArrayInputStream("1\n2".getBytes()));
+        System.setIn(new ByteArrayInputStream("1".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
         BibliotecaApp.main(new String[]{});
 
         verify(printStream, times(2)).print("1. List of Books");
@@ -68,26 +77,45 @@ class BibliotecaAppTest {
     }
 
     @Test
+    @ExpectSystemExit
     void testShouldPrintInvalidOptionIfUserChooseInvalidOption() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("6\n2".getBytes()));
+        System.setIn(new ByteArrayInputStream("6".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
-        verify(printStream,times(1)).println("Please select a valid option!");
+        verify(printStream, times(1)).println("Please select a valid option!");
     }
 
     @Test
+    @ExpectSystemExit
     void testShouldQuitTheApplicationWhenUserOptToQuit() {
         PrintStream printStream = mock(PrintStream.class);
         System.setOut(printStream);
 
-        System.setIn(new ByteArrayInputStream("2".getBytes()));
+        System.setIn(new ByteArrayInputStream("3".getBytes()));
 
         BibliotecaApp.main(new String[]{});
 
         verify(printStream).println("Thank you!");
     }
 
+    @Test
+    @ExpectSystemExit
+    void testShouldCheckOutABookFromLibraryWhenUserCheckOut() {
+        PrintStream printStream = mock(PrintStream.class);
+        System.setOut(printStream);
+        String option1 = "3";
+        String bookName = "Book1";
+        String bookAuthor = "Author1";
+        String bookYear = "1997";
+        String inputStream = option1 + "\n" + bookName + "\n" + bookAuthor + "\n" + bookYear;
+        System.setIn(new ByteArrayInputStream(inputStream.getBytes()));
+
+        BibliotecaApp.main(new String[]{});
+        verify(printStream, times(0)).print("Book1");
+        verify(printStream, times(1)).print("Book2");
+    }
 }

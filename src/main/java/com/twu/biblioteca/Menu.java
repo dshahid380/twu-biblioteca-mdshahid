@@ -12,14 +12,16 @@ public class Menu {
     }
 
     public void show() {
-        for(int i = 0; i<this.menuList.size(); i++)
-            System.out.print((i+1)+". "+this.menuList.get(i));
+        for (int i = 0; i < this.menuList.size(); i++)
+            System.out.print((i + 1) + ". " + this.menuList.get(i));
         System.out.println("\nPlease choose an option : ");
     }
 
-    public void performOperation(int input) {
+    public void performOperation(int input, Book book) {
         if (input == 1)
             library.displayAllBooks();
+        else if (input == 3)
+            library.checkOut(book);
         else if (input == 2)
             System.out.println("Thank you!");
         else

@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class MenuTest {
     @Test
@@ -31,5 +30,14 @@ class MenuTest {
         verify(printStream).print("Book2");
         verify(printStream).print("Author2");
         verify(printStream).print("1998");
+    }
+
+    @Test
+    void testShouldPrintAnMessageToUserForQuit() {
+        Menu menu = new Menu();
+        PrintStream printStream = mock(PrintStream.class);
+        System.setOut(printStream);
+        menu.performOperation(4);
+        verify(printStream,times(1)).println("Thank you!");
     }
 }

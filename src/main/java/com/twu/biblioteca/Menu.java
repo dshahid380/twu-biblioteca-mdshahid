@@ -26,5 +26,7 @@ public class Menu {
         BookShelf bookShelf = new BookShelf();
         if(input==1)
             bookShelf.displayAllBooks();
+        else
+            System.out.println("Thank you!");
     }
 }

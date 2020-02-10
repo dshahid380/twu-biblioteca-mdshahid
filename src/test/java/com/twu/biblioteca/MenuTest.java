@@ -28,27 +28,4 @@ class MenuTest {
         verify(printStream).print("2. Quit");
     }
 
-    @Test
-    void testShouldPrintDetailsOfBooks() {
-        menu.performOperation(1,null);
-        verify(printStream).print("Book1");
-        verify(printStream).print("Author1");
-        verify(printStream).print("1997");
-        verify(printStream).print("Book2");
-        verify(printStream).print("Author2");
-        verify(printStream).print("1998");
-    }
-
-    @Test
-    void testShouldPrintAnMessageToUserForQuit() {
-        menu.performOperation(3,null);
-        verify(printStream, times(1)).println("Thank you!");
-    }
-
-    @Test
-    void testShouldPrintAnMessageToUserWhenEnterWrongOption() {
-        menu.performOperation(6,null);
-        verify(printStream, times(1)).println("Please select a valid option!");
-    }
-
 }

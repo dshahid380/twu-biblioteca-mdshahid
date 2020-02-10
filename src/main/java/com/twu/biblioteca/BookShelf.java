@@ -3,8 +3,11 @@ package com.twu.biblioteca;
 import java.util.List;
 
 public class BookShelf {
-    private List<Book> bookList = List.of(new Book("Book1","Author1","1997"),
-            new Book("Book2","Author2","1998"));
+    private List<Book> bookList;
+
+    public BookShelf(List<Book> bookList) {
+        this.bookList = bookList;
+    }
 
     public void displayAllBooks() {
         for (Book book : bookList) {

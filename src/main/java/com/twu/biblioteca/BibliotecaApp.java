@@ -4,6 +4,7 @@ import java.util.*;
 
 public class BibliotecaApp {
     private List<Book> books = getDefaultBooks();
+    private List<Movie> movies = getDefaultMovies();
     private List<String> menuList = getMenu();
     private Console console;
 
@@ -22,7 +23,8 @@ public class BibliotecaApp {
     public void start() throws IOException {
         Menu menu = new Menu(menuList, console);
         BookLibrary bookLibrary = new BookLibrary(books, console);
-        UserInput userInput = new UserInput(bookLibrary, console);
+        MovieLibrary movieLibrary = new MovieLibrary(movies,console);
+        UserInput userInput = new UserInput(bookLibrary,movieLibrary, console);
 
         printWelcomeMessage();
         do {
@@ -36,6 +38,13 @@ public class BibliotecaApp {
         bookList.add(new Book("Book1", "Author1", "1997"));
         bookList.add(new Book("Book2", "Author2", "1998"));
         return bookList;
+    }
+
+    private List<Movie> getDefaultMovies(){
+        List<Movie> movies = new ArrayList<>();
+        movies.add(new Movie("Movie1","2000","Director1","10",console));
+        movies.add(new Movie("Movie2","2001","Director2","9",console));
+        return movies;
     }
 
     private List<String> getMenu() {

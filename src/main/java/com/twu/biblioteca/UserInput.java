@@ -5,11 +5,13 @@ import java.io.IOException;
 public class UserInput {
     private boolean status = true;
     private BookLibrary bookLibrary;
+    private MovieLibrary movieLibrary;
     private Console console;
 
-    public UserInput(BookLibrary bookLibrary, Console console) {
+    public UserInput(BookLibrary bookLibrary,MovieLibrary movieLibrary, Console console) {
         this.bookLibrary = bookLibrary;
         this.console = console;
+        this.movieLibrary = movieLibrary;
     }
 
     public void readInput() throws IOException {
@@ -17,8 +19,8 @@ public class UserInput {
         final int DISPLAY_BOOK = 1;
         final int CHECKOUT_BOOK = 2;
         final int RETURN_BOOK = 3;
-        //final int MOVIES_LIST = 4;
-        final int QUIT = 4;
+        final int MOVIES_LIST = 4;
+        final int QUIT = 5;
 
         int userInput = console.readInteger();
 
@@ -32,6 +34,8 @@ public class UserInput {
                 break;
             case RETURN_BOOK:
                 bookLibrary.returnBook(console.readBook());
+            case MOVIES_LIST:
+                movieLibrary.displayAllMovies();
             case QUIT:
                 status = false;
                 console.display("Thank you!");

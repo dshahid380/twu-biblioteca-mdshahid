@@ -4,13 +4,15 @@ import java.io.IOException;
 import java.util.*;
 
 public class BibliotecaApp {
-    private List<Book> books = getDefaultBooks();
-    private List<Movie> movies = getDefaultMovies();
-    private List<String> menuList = getMenu();
+    Default aDefault = new Default();
+    private List<Book> books = aDefault.getDefaultBooks();
+    private List<Movie> movies = aDefault.getDefaultMovies();
+    private List<String> menuList = aDefault.getMenu();
     private Console console;
 
     public BibliotecaApp(Console console) {
         this.console = console;
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -32,24 +34,6 @@ public class BibliotecaApp {
             menu.show();
             userInput.readInput();
         } while (userInput.isExit());
-    }
-
-    private List<Book> getDefaultBooks() {
-        List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("Book1", "Author1", "1997"));
-        bookList.add(new Book("Book2", "Author2", "1998"));
-        return bookList;
-    }
-
-    private List<Movie> getDefaultMovies() {
-        List<Movie> movies = new ArrayList<>();
-        movies.add(new Movie("Movie1", "2000", "Director1", "10"));
-        movies.add(new Movie("Movie2", "2001", "Director2", "9"));
-        return movies;
-    }
-
-    private List<String> getMenu() {
-        return List.of("List of Books", "Check Out Book", "Return a book", "Quit");
     }
 
 }

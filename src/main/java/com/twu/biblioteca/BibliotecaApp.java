@@ -21,8 +21,8 @@ public class BibliotecaApp {
 
     public void start() throws IOException {
         Menu menu = new Menu(menuList, console);
-        Library library = new Library(books, console);
-        UserInput userInput = new UserInput(library, console);
+        BookLibrary bookLibrary = new BookLibrary(books, console);
+        UserInput userInput = new UserInput(bookLibrary, console);
 
         printWelcomeMessage();
         do {

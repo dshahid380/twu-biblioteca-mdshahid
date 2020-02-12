@@ -3,20 +3,20 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Library {
+public class BookLibrary {
     private List<Book> books;
     private List<Book> checkOutBooks;
 
     private Console console;
 
-    public Library(List<Book> books, Console console) {
+    public BookLibrary(List<Book> books, Console console) {
         this.books = books;
         this.console = console;
         this.checkOutBooks = new ArrayList<>();
     }
 
     public void displayAllBooks() {
-        for (Book book : books) console.display(book.getBookDetail());
+        for (Book book : books) console.display(book.getItemDetails());
     }
 
     public void checkOut(Book book) {

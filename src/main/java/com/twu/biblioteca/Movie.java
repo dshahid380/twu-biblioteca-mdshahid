@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.Objects;
+
 public class Movie {
     private String movieName;
     private String year;
@@ -15,7 +17,8 @@ public class Movie {
         this.console = console;
     }
 
-    public void showMoviesDetails(){
+    public void showMoviesDetails() {
         console.display(String.format("%s %s %s %s", movieName, year, director, rating));
     }
+
 }

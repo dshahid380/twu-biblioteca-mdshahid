@@ -1,27 +1,27 @@
 package com.twu.biblioteca;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayInputStream;
+
 import java.io.IOException;
 import static org.mockito.Mockito.*;
 
 class UserInputTest {
     Console console;
-    Library library;
+    BookLibrary bookLibrary;
     UserInput userInput;
 
     @BeforeEach
     public void setUp() {
         console = mock(Console.class);
-        library = mock(Library.class);
-        userInput = new UserInput(library, console);
+        bookLibrary = mock(BookLibrary.class);
+        userInput = new UserInput(bookLibrary, console);
     }
 
     @Test
     void testShouldPrintDetailsOfBooks() throws IOException {
         when(console.readInteger()).thenReturn(1);
         userInput.readInput();
-        verify(library,times(1)).displayAllBooks();
+        verify(bookLibrary,times(1)).displayAllBooks();
     }
 
     @Test

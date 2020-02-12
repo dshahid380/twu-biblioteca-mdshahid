@@ -25,8 +25,6 @@ class BibliotecaAppTest {
 
         verify(console).display("Book1 Author1 1997");
         verify(console).display("Book2 Author2 1998");
-//        verify(console).display("Thank you!");
-
 
     }
 

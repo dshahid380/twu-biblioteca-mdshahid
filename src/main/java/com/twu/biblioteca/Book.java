@@ -13,16 +13,8 @@ public class Book {
         this.year = year;
     }
 
-    public String getBookName() {
-        return this.bookName;
-    }
-
-    public String getAuthorName() {
-        return this.authorName;
-    }
-
-    public String getYear() {
-        return this.year;
+    public String getBookDetail() {
+        return (bookName + " " + authorName + " " + year);
     }
 
     @Override

@@ -10,21 +10,20 @@ import static org.mockito.Mockito.*;
 
 class MenuTest {
     Menu menu;
-    PrintStream printStream;
+    Console console;
 
     @BeforeEach
     public void setUp() {
+        console = mock(Console.class);
         List<String> menuList = List.of("List of Books", "Quit");
-        menu = new Menu(menuList);
-        printStream = mock(PrintStream.class);
-        System.setOut(printStream);
+        menu = new Menu(menuList, console);
     }
 
     @Test
     void testShouldPrintListOfMenus() {
         menu.show();
-        verify(printStream).print("1. List of Books");
-        verify(printStream).print("2. Quit");
+        verify(console).display("List of Books");
+        verify(console).display("Quit");
     }
 
 }

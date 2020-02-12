@@ -1,40 +1,46 @@
 package com.twu.biblioteca;
 
-import java.util.Scanner;
+import java.io.IOException;
 
 public class UserInput {
+    private boolean status = true;
     private Library library;
+    private Console console;
 
-    public UserInput(Library library) {
+    public UserInput(Library library, Console console) {
         this.library = library;
+        this.console = console;
     }
 
-    public void readInput() {
-        int input;
-        Scanner scanner = new Scanner(System.in);
-        input = scanner.nextInt();
-        if (input != 1 && input != 2 && input != 3) {
-            System.out.println("Please select a valid option!");
-            return;
-        }
-        switch (input) {
-            case 1:
-                this.library.displayAllBooks();
+    public void readInput() throws IOException {
+        //Magic numbers
+        final int DISPLAY_BOOK = 1;
+        final int CHECKOUT_BOOK = 2;
+        final int RETURN_BOOK = 3;
+        final int QUIT = 4;
+
+        int userInput = console.readInteger();
+
+        switch (userInput) {
+            case DISPLAY_BOOK:
+                library.displayAllBooks();
                 break;
-            case 2:
-                System.out.println("Please Enter book name");
-                String bookName = scanner.next();
-                System.out.println("Please Enter book author name");
-                String bookAuthor = scanner.next();
-                System.out.println("Please Enter book year");
-                String bookYear = scanner.next();
-                Book book = new Book(bookName, bookAuthor, bookYear);
-                this.library.checkOut(book);
-                System.out.println("Thank you! Enjoy the Book");
+            case CHECKOUT_BOOK:
+                Book book = console.readBook();
+                library.checkOut(book);
                 break;
-            case 3:
-                System.out.println("Thank you!");
-                System.exit(0);
+            case RETURN_BOOK:
+                library.returnBook(console.readBook());
+            case QUIT:
+                status = false;
+                console.display("Thank you!");
+                break;
+            default:
+                console.display("Please select a valid option!");
         }
+    }
+
+    public boolean isExit() {
+        return status;
     }
 }

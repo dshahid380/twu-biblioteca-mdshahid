@@ -4,14 +4,16 @@ import java.util.List;
 
 public class Menu {
     private List<String> menuList;
-    Menu(List<String> menuList) {
+    private Console console;
+
+    Menu(List<String> menuList, Console console) {
         this.menuList = menuList;
+        this.console = console;
     }
 
     public void show() {
-        for (int i = 0; i < this.menuList.size(); i++)
-            System.out.print((i + 1) + ". " + this.menuList.get(i));
-        System.out.println("\nPlease choose an option : ");
+        for (String menu : menuList) console.display(menu);
+        console.display("Please choose an option : ");
     }
 
 }

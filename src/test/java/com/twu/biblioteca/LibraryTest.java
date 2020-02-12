@@ -3,7 +3,6 @@ package com.twu.biblioteca;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,28 +10,23 @@ import static org.mockito.Mockito.*;
 
 class LibraryTest {
     Library library;
-    PrintStream printStream;
+    Console console;
 
     @BeforeEach
     void setUp() {
-        printStream = mock(PrintStream.class);
-        System.setOut(printStream);
+        console = mock(Console.class);
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book("Book1", "Author1", "1997"));
         bookList.add(new Book("Book2", "Author2", "1998"));
         bookList.add(new Book("Book3", "Author3", "1999"));
-        library = new Library(bookList);
+        library = new Library(bookList, console);
     }
 
     @Test
     void testShouldDisplayBooksWithItsAuthorAndYear() {
         library.displayAllBooks();
-        verify(printStream).print("Book1");
-        verify(printStream).print("Author1");
-        verify(printStream).print("1997");
-        verify(printStream).print("Book2");
-        verify(printStream).print("Author2");
-        verify(printStream).print("1998");
+        verify(console).display("Book1 Author1 1997");
+        verify(console).display("Book2 Author2 1998");
     }
 
     @Test
@@ -42,8 +36,8 @@ class LibraryTest {
         library.checkOut(book);
         library.displayAllBooks();
 
-        verify(printStream, times(1)).print("Book1");
-        verify(printStream, times(0)).print("Book2");
+        verify(console, times(1)).display("Book1 Author1 1997");
+        verify(console, times(0)).display("Book2 Author2 1998");
     }
 
 }

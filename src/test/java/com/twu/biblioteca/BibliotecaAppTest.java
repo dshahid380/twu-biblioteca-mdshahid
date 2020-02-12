@@ -1,153 +1,101 @@
 package com.twu.biblioteca;
-
-import com.ginsberg.junit.exit.ExpectSystemExit;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayInputStream;
-import java.io.PrintStream;
+import java.io.IOException;
 
 import static org.mockito.Mockito.*;
 
 class BibliotecaAppTest {
 
     @Test
-    @ExpectSystemExit
-    public void testShouldPrintTheWelcomeMessage() {
-        PrintStream printStream = mock(PrintStream.class);
-        System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
-        System.setIn(new ByteArrayInputStream("3".getBytes()));
-
-        BibliotecaApp.main(new String[]{});
-
-        verify(printStream).println("Welcome to Biblioteca. You one-stop-shop for great book titles in Bangalore!");
+    public void testShouldPrintTheWelcomeMessage() throws IOException {
+        Console console = mock(Console.class);
+        when(console.readInteger()).thenReturn(1,4);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
+        bibliotecaApp.start();
+        verify(console).display("Welcome to Biblioteca. You one-stop-shop for great book titles in Bangalore!");
     }
 
     @Test
-    @ExpectSystemExit
-    public void testShouldBeAbleToPrintAllAvailableBooks() {
-        PrintStream printStream = mock(PrintStream.class);
-        System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
-        System.setIn(new ByteArrayInputStream("3".getBytes()));
+    public void testShouldBeAbleToPrintAllAvailableBooks() throws IOException {
+        Console console = mock(Console.class);
+        when(console.readInteger()).thenReturn(1,4);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
-        BibliotecaApp.main(new String[]{});
+        bibliotecaApp.start();
 
-        verify(printStream).print("Book1");
-        verify(printStream).print("Book2");
-        verify(printStream).println("Thank you!");
+        verify(console).display("Book1 Author1 1997");
+        verify(console).display("Book2 Author2 1998");
+//        verify(console).display("Thank you!");
+
 
     }
 
     @Test
-    @ExpectSystemExit
-    void testShouldPrintAllBooksWithTheirAuthorsNameAndYear() {
-        PrintStream printStream = mock(PrintStream.class);
-        System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
-        System.setIn(new ByteArrayInputStream("3".getBytes()));
+    void testShouldPrintAllBooksDetailsWhenUserSelectListOfBooks() throws IOException {
+        Console console = mock(Console.class);
+        when(console.readInteger()).thenReturn(1,4);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
-        BibliotecaApp.main(new String[]{});
+        bibliotecaApp.start();
 
-        verify(printStream).print("Book1");
-        verify(printStream).print("Author1");
-        verify(printStream).print("1997");
-        verify(printStream).print("Book2");
-        verify(printStream).print("Author2");
-        verify(printStream).print("1998");
+        verify(console, times(2)).display("List of Books");
+        verify(console).display("Book1 Author1 1997");
+        verify(console).display("Book2 Author2 1998");
     }
 
     @Test
-    @ExpectSystemExit
-    void testShouldPrintAllBooksDetailsWhenUserSelectListOfBooks() {
-        PrintStream printStream = mock(PrintStream.class);
-        System.setOut(printStream);
+    void testShouldPrintInvalidOptionIfUserChooseInvalidOption() throws IOException {
+        Console console = mock(Console.class);
+        when(console.readInteger()).thenReturn(6,4);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
-        System.setIn(new ByteArrayInputStream("3".getBytes()));
-        BibliotecaApp.main(new String[]{});
+        bibliotecaApp.start();
 
-        verify(printStream, times(2)).print("1. List of Books");
-        verify(printStream).print("Book1");
-        verify(printStream).print("Author1");
-        verify(printStream).print("1997");
-        verify(printStream).print("Book2");
-        verify(printStream).print("Author2");
-        verify(printStream).print("1998");
+        verify(console, times(1)).display("Please select a valid option!");
     }
 
     @Test
-    @ExpectSystemExit
-    void testShouldPrintInvalidOptionIfUserChooseInvalidOption() {
-        PrintStream printStream = mock(PrintStream.class);
-        System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("6".getBytes()));
-        System.setIn(new ByteArrayInputStream("3".getBytes()));
+    void testShouldQuitTheApplicationWhenUserOptToQuit() throws IOException {
+        Console console = mock(Console.class);
+        when(console.readInteger()).thenReturn(4);
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
-        BibliotecaApp.main(new String[]{});
+        bibliotecaApp.start();
 
-        verify(printStream, times(1)).println("Please select a valid option!");
+        verify(console).display("Thank you!");
     }
 
     @Test
-    @ExpectSystemExit
-    void testShouldQuitTheApplicationWhenUserOptToQuit() {
-        PrintStream printStream = mock(PrintStream.class);
-        System.setOut(printStream);
+    void testShouldCheckOutABookFromLibraryWhenUserCheckOut() throws IOException {
+        Console console = mock(Console.class);
+        when(console.readInteger()).thenReturn(2,1,4);
+        when(console.readBook()).thenReturn(new Book("Book1", "Author1", "1997"));
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
-        System.setIn(new ByteArrayInputStream("3".getBytes()));
-
-        BibliotecaApp.main(new String[]{});
-
-        verify(printStream).println("Thank you!");
+        bibliotecaApp.start();
+        verify(console, times(0)).display("Book1 Author1 1997");
+        verify(console, times(1)).display("Book2 Author2 1998");
     }
 
     @Test
-    @ExpectSystemExit
-    void testShouldCheckOutABookFromLibraryWhenUserCheckOut() {
-        PrintStream printStream = mock(PrintStream.class);
-        System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("2".getBytes()));
-        System.setIn(new ByteArrayInputStream("Book1".getBytes()));
-        System.setIn(new ByteArrayInputStream("Author1".getBytes()));
-        System.setIn(new ByteArrayInputStream("1997".getBytes()));
-        System.setIn(new ByteArrayInputStream("1".getBytes()));
-        System.setIn(new ByteArrayInputStream("3".getBytes()));
+    void testShouldPrintAnMessageToUserWhenUserCheckOutABook() throws IOException {
+        Console console = mock(Console.class);
+        when(console.readInteger()).thenReturn(2,4);
+        when(console.readBook()).thenReturn(new Book("Book1", "Author1", "1997"));
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
-        BibliotecaApp.main(new String[]{});
-        verify(printStream, times(0)).print("Book1");
-        verify(printStream, times(1)).print("Book2");
+        bibliotecaApp.start();
+        verify(console, times(1)).display("Thank you! Enjoy the Book");
     }
 
     @Test
-    @ExpectSystemExit
-    void testShouldPrintAnMessageToUserWhenUserCheckOutABook() {
-        PrintStream printStream = mock(PrintStream.class);
-        System.setOut(printStream);
-        System.setIn(new ByteArrayInputStream("2".getBytes()));
-        System.setIn(new ByteArrayInputStream("Book1".getBytes()));
-        System.setIn(new ByteArrayInputStream("Author1".getBytes()));
-        System.setIn(new ByteArrayInputStream("1997".getBytes()));
-        System.setIn(new ByteArrayInputStream("3".getBytes()));
+    void testShouldNotifyWithAnMessageToUserWhenUserWantToCheckOutButBookNotAvailable() throws IOException {
+        Console console = mock(Console.class);
+        when(console.readInteger()).thenReturn(2,4);
+        when(console.readBook()).thenReturn(new Book("Book4", "Author4", "1997"));
+        BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
-        BibliotecaApp.main(new String[]{});
-
-        verify(printStream, times(1)).println("Thank you! Enjoy the Book");
-    }
-
-    @Test
-    @ExpectSystemExit
-    void testShouldNotifyWithAnMessageToUserWhenUserWantToCheckOutButBookNotAvailable() {
-        PrintStream printStream = mock(PrintStream.class);
-        System.setOut(printStream);
-
-        System.setIn(new ByteArrayInputStream("2".getBytes()));
-        System.setIn(new ByteArrayInputStream("Book4".getBytes()));
-        System.setIn(new ByteArrayInputStream("Author4".getBytes()));
-        System.setIn(new ByteArrayInputStream("1997".getBytes()));
-        System.setIn(new ByteArrayInputStream("3".getBytes()));
-
-        BibliotecaApp.main(new String[]{});
-        verify(printStream, times(1)).println("Sorry, that book is not available");
+        bibliotecaApp.start();
+        verify(console, times(1)).display("Sorry, that book is not available");
     }
 }

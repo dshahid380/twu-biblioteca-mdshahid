@@ -4,34 +4,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
-    private List<Book> bookList;
-    private List<Book> checkOutList;
+    private List<Book> books;
+    private List<Book> checkOutBooks;
 
-    public Library(List<Book> bookList) {
-        this.bookList = bookList;
-        checkOutList = new ArrayList<>();
+    private Console console;
+
+    public Library(List<Book> books, Console console) {
+        this.books = books;
+        this.console = console;
+        this.checkOutBooks = new ArrayList<>();
     }
 
     public void displayAllBooks() {
-        for (Book book : bookList) {
-            System.out.print(book.getBookName());
-            System.out.print(" ");
-            System.out.print(book.getAuthorName());
-            System.out.print(" ");
-            System.out.print(book.getYear());
-            System.out.println();
-        }
+        for (Book book : books) console.display(book.getBookDetail());
     }
 
     public void checkOut(Book book) {
-        for (int i = 0; i < this.bookList.size(); i++) {
-            if (bookList.get(i).equals(book)) {
-                this.checkOutList.add(book);
-                this.bookList.remove(i);
-                return;
-            }
+        if (books.contains(book)) {
+            checkOutBooks.add(book);
+            books.remove(book);
+            console.display("Thank you! Enjoy the Book");
+            return;
         }
-        System.out.println("Sorry, that book is not available");
+        console.display("Sorry, that book is not available");
     }
 
+    public void returnBook(Book book) {
+        if (books.contains(book)) {
+            checkOutBooks.remove(book);
+            books.add(book);
+            console.display("Thank you for returning the book!");
+            return;
+        }
+        console.display("That is not a valid book to return");
+    }
 }

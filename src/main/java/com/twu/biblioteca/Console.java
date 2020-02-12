@@ -7,9 +7,11 @@ import java.io.InputStreamReader;
 //TODO: no tests
 public class Console {
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
     public void display(String message) {
         System.out.println(message);
     }
+
     public String read() throws IOException {
         return bufferedReader.readLine();
     }

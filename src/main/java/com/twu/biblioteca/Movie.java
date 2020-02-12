@@ -21,4 +21,20 @@ public class Movie {
         console.display(String.format("%s %s %s %s", movieName, year, director, rating));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return Objects.equals(movieName, movie.movieName) &&
+                Objects.equals(year, movie.year) &&
+                Objects.equals(director, movie.director) &&
+                Objects.equals(rating, movie.rating) &&
+                Objects.equals(console, movie.console);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movieName, year, director, rating, console);
+    }
 }

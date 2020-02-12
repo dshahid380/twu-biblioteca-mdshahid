@@ -20,4 +20,14 @@ public class MovieLibrary {
             movie.showMoviesDetails();
     }
 
+    public void checkOut(Movie movie) {
+        if (movies.contains(movie)) {
+            checkOutMovies.add(movie);
+            movies.remove(movie);
+            console.display("Thank you! Enjoy the Movie");
+            return;
+        }
+        console.display("Sorry, that movie is not available");
+    }
+
 }

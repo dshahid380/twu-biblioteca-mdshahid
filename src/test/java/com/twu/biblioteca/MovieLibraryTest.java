@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class MovieLibraryTest {
@@ -27,6 +26,17 @@ class MovieLibraryTest {
         movieLibrary.displayAllMovies();
         verify(console).display("Movie1 2001 Director1 10");
         verify(console).display("Movie2 2002 Director2 9");
+    }
+
+    @Test
+    void testShouldCheckOutMovieFromLibrary() {
+        Movie movie = new Movie("Movie1", "2001", "Director1","10",console);
+
+        movieLibrary.checkOut(movie);
+        movieLibrary.displayAllMovies();
+
+        verify(console, times(0)).display("Movie1 2001 Director1 10");
+        verify(console, times(1)).display("Movie2 2002 Director2 9");
     }
 
 }

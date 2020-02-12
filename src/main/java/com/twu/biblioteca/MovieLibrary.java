@@ -17,7 +17,7 @@ public class MovieLibrary {
 
     public void displayAllMovies() {
         for (Movie movie : movies)
-            movie.showMoviesDetails();
+            console.display(movie.getMoviesDetails());
     }
 
     public void checkOut(Movie movie) {

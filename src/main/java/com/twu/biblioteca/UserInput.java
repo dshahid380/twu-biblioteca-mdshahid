@@ -8,7 +8,7 @@ public class UserInput {
     private MovieLibrary movieLibrary;
     private Console console;
 
-    public UserInput(BookLibrary bookLibrary,MovieLibrary movieLibrary, Console console) {
+    public UserInput(BookLibrary bookLibrary, MovieLibrary movieLibrary, Console console) {
         this.bookLibrary = bookLibrary;
         this.console = console;
         this.movieLibrary = movieLibrary;
@@ -20,7 +20,8 @@ public class UserInput {
         final int CHECKOUT_BOOK = 2;
         final int RETURN_BOOK = 3;
         final int MOVIES_LIST = 4;
-        final int QUIT = 5;
+        final int CHECKOUT_MOVIE = 5;
+        final int QUIT = 6;
 
         int userInput = console.readInteger();
 
@@ -36,6 +37,8 @@ public class UserInput {
                 bookLibrary.returnBook(console.readBook());
             case MOVIES_LIST:
                 movieLibrary.displayAllMovies();
+            case CHECKOUT_MOVIE:
+                movieLibrary.checkOut(console.readMovie());
             case QUIT:
                 status = false;
                 console.display("Thank you!");

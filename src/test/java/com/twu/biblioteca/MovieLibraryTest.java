@@ -16,8 +16,8 @@ class MovieLibraryTest {
     void setUp() {
         console = mock(Console.class);
         List<Movie> movieList = new ArrayList<>();
-        movieList.add(new Movie("Movie1", "2001", "Director1","10",console));
-        movieList.add(new Movie("Movie2", "2002", "Director2","9",console));
+        movieList.add(new Movie("Movie1", "2001", "Director1", "10"));
+        movieList.add(new Movie("Movie2", "2002", "Director2", "9"));
         movieLibrary = new MovieLibrary(movieList, console);
     }
 
@@ -30,7 +30,7 @@ class MovieLibraryTest {
 
     @Test
     void testShouldCheckOutMovieFromLibrary() {
-        Movie movie = new Movie("Movie1", "2001", "Director1","10",console);
+        Movie movie = new Movie("Movie1", "2001", "Director1", "10");
 
         movieLibrary.checkOut(movie);
         movieLibrary.displayAllMovies();

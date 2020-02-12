@@ -26,4 +26,12 @@ public class Console {
         return new Book(bookName, bookAuthor, bookYear);
     }
 
+    public Movie readMovie() throws IOException {
+        String movieName = read();
+        String movieYear = read();
+        String movieDirector = read();
+        String movieRating = read();
+        return new Movie(movieName, movieYear, movieDirector, movieRating);
+    }
+
 }

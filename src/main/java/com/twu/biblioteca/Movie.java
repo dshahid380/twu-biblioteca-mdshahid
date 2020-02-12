@@ -7,18 +7,16 @@ public class Movie {
     private String year;
     private String director;
     private String rating;
-    private Console console;
 
-    public Movie(String movieName, String year, String director, String rating, Console console) {
+    public Movie(String movieName, String year, String director, String rating) {
         this.movieName = movieName;
         this.year = year;
         this.director = director;
         this.rating = rating;
-        this.console = console;
     }
 
-    public void showMoviesDetails() {
-        console.display(String.format("%s %s %s %s", movieName, year, director, rating));
+    public String getMoviesDetails() {
+        return (String.format("%s %s %s %s", movieName, year, director, rating));
     }
 
     @Override
@@ -29,12 +27,11 @@ public class Movie {
         return Objects.equals(movieName, movie.movieName) &&
                 Objects.equals(year, movie.year) &&
                 Objects.equals(director, movie.director) &&
-                Objects.equals(rating, movie.rating) &&
-                Objects.equals(console, movie.console);
+                Objects.equals(rating, movie.rating);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(movieName, year, director, rating, console);
+        return Objects.hash(movieName, year, director, rating);
     }
 }

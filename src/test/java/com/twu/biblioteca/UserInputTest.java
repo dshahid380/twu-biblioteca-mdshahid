@@ -30,7 +30,7 @@ class UserInputTest {
 
     @Test
     void testShouldPrintAnMessageToUserWhenEnterWrongOption() throws IOException {
-        when(console.readInteger()).thenReturn(6);
+        when(console.readInteger()).thenReturn(10);
         userInput.readInput();
         verify(console, times(1)).display("Please select a valid option!");
     }
@@ -47,5 +47,20 @@ class UserInputTest {
         userInput.readInput();
         verify(movieLibrary, times(1)).displayAllMovies();
     }
-
+    @Test
+    void testShouldReturnCheckOutABook() throws IOException {
+        Book book = mock(Book.class);
+        when(console.readInteger()).thenReturn(2);
+        when(console.readBook()).thenReturn(book);
+        userInput.readInput();
+        verify(bookLibrary,times(1)).checkOut(book);
+    }
+    @Test
+    void testShouldReturnCheckOutAMovie() throws IOException {
+        Movie movie = mock(Movie.class);
+        when(console.readInteger()).thenReturn(5);
+        when(console.readMovie()).thenReturn(movie);
+        userInput.readInput();
+        verify(movieLibrary,times(1)).checkOut(movie);
+    }
 }

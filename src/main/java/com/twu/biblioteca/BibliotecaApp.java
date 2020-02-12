@@ -1,4 +1,5 @@
 package com.twu.biblioteca;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -23,8 +24,8 @@ public class BibliotecaApp {
     public void start() throws IOException {
         Menu menu = new Menu(menuList, console);
         BookLibrary bookLibrary = new BookLibrary(books, console);
-        MovieLibrary movieLibrary = new MovieLibrary(movies,console);
-        UserInput userInput = new UserInput(bookLibrary,movieLibrary, console);
+        MovieLibrary movieLibrary = new MovieLibrary(movies, console);
+        UserInput userInput = new UserInput(bookLibrary, movieLibrary, console);
 
         printWelcomeMessage();
         do {
@@ -40,10 +41,10 @@ public class BibliotecaApp {
         return bookList;
     }
 
-    private List<Movie> getDefaultMovies(){
+    private List<Movie> getDefaultMovies() {
         List<Movie> movies = new ArrayList<>();
-        movies.add(new Movie("Movie1","2000","Director1","10",console));
-        movies.add(new Movie("Movie2","2001","Director2","9",console));
+        movies.add(new Movie("Movie1", "2000", "Director1", "10"));
+        movies.add(new Movie("Movie2", "2001", "Director2", "9"));
         return movies;
     }
 

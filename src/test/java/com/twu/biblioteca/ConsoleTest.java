@@ -28,6 +28,7 @@ class ConsoleTest {
         console.display("Hello");
         verify(printStream).println("Hello");
     }
+
     @Test
     void testShouldReturnABook() throws IOException {
         Console console = new Console();

@@ -27,8 +27,8 @@ public class BibliotecaApp {
         Menu menu = new Menu(menuList, console);
         BookLibrary bookLibrary = new BookLibrary(books, console);
         MovieLibrary movieLibrary = new MovieLibrary(movies, console);
-        List<MenuItem> menuItems = aDefault.getMenuItems(bookLibrary,movieLibrary,console);
-        UserInput userInput = new UserInput(menuItems,console);
+        HashMap<Integer, MenuItem> menuItems = aDefault.getMenuItems(bookLibrary, movieLibrary, console);
+        UserInput userInput = new UserInput(menuItems, console);
 
         printWelcomeMessage();
         do {

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
 
 import static org.mockito.Mockito.*;
 
@@ -20,8 +20,8 @@ class UserInputTest {
         bookLibrary = mock(BookLibrary.class);
         movieLibrary = mock(MovieLibrary.class);
         Default aDefault = new Default();
-        List<MenuItem> menuItems = aDefault.getMenuItems(bookLibrary,movieLibrary,console);
-        userInput = new UserInput(menuItems,console);
+        HashMap<Integer, MenuItem> menuItems = aDefault.getMenuItems(bookLibrary, movieLibrary, console);
+        userInput = new UserInput(menuItems, console);
     }
 
     @Test
@@ -44,26 +44,29 @@ class UserInputTest {
         userInput.readInput();
         verify(console, times(1)).display("Thank you!");
     }
+
     @Test
     void testShouldPrintDetailsOfMovie() throws IOException {
         when(console.readInteger()).thenReturn(4);
         userInput.readInput();
         verify(movieLibrary, times(1)).displayAllMovies();
     }
+
     @Test
     void testShouldReturnCheckOutABook() throws IOException {
         Book book = mock(Book.class);
         when(console.readInteger()).thenReturn(2);
         when(console.readBook()).thenReturn(book);
         userInput.readInput();
-        verify(bookLibrary,times(1)).checkOut(book);
+        verify(bookLibrary, times(1)).checkOut(book);
     }
+
     @Test
     void testShouldReturnCheckOutAMovie() throws IOException {
         Movie movie = mock(Movie.class);
         when(console.readInteger()).thenReturn(5);
         when(console.readMovie()).thenReturn(movie);
         userInput.readInput();
-        verify(movieLibrary,times(1)).checkOut(movie);
+        verify(movieLibrary, times(1)).checkOut(movie);
     }
 }

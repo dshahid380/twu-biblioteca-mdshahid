@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Default {
@@ -21,14 +22,14 @@ public class Default {
         return List.of("List of Books", "Check Out Book", "Return a book", "Quit");
     }
 
-    public List<MenuItem> getMenuItems(BookLibrary bookLibrary, MovieLibrary movieLibrary, Console console){
-        List<MenuItem> menuItems = new ArrayList<>();
-        menuItems.add(new ShowBookItems(bookLibrary));
-        menuItems.add(new CheckOutBookItem(bookLibrary,console));
-        menuItems.add(new ReturnBookItem(bookLibrary,console));
-        menuItems.add(new ShowMovieItems(movieLibrary));
-        menuItems.add(new CheckOutMovieItem(movieLibrary,console));
-        menuItems.add(new QuitMenu());
+    public HashMap<Integer, MenuItem> getMenuItems(BookLibrary bookLibrary, MovieLibrary movieLibrary, Console console){
+        HashMap<Integer, MenuItem> menuItems = new HashMap<>();
+        menuItems.put(1,new ShowBookItems(bookLibrary));
+        menuItems.put(2,new CheckOutBookItem(bookLibrary,console));
+        menuItems.put(3,new ReturnBookItem(bookLibrary,console));
+        menuItems.put(4,new ShowMovieItems(movieLibrary));
+        menuItems.put(5,new CheckOutMovieItem(movieLibrary,console));
+        menuItems.put(6,new QuitMenu());
         return menuItems;
     }
 }

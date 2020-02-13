@@ -102,7 +102,7 @@ class BibliotecaAppTest {
     @Test
     void testShouldDisplayListOfMovie() throws IOException {
         Console console = mock(Console.class);
-        when(console.readInteger()).thenReturn(4,6);
+        when(console.readInteger()).thenReturn(4, 6);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
         bibliotecaApp.start();

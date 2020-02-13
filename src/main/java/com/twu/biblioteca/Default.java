@@ -20,4 +20,15 @@ public class Default {
     public List<String> getMenu() {
         return List.of("List of Books", "Check Out Book", "Return a book", "Quit");
     }
+
+    public List<MenuItem> getMenuItems(BookLibrary bookLibrary, MovieLibrary movieLibrary, Console console){
+        List<MenuItem> menuItems = new ArrayList<>();
+        menuItems.add(new ShowBookItems(bookLibrary));
+        menuItems.add(new CheckOutBookItem(bookLibrary,console));
+        menuItems.add(new ReturnBookItem(bookLibrary,console));
+        menuItems.add(new ShowMovieItems(movieLibrary));
+        menuItems.add(new CheckOutMovieItem(movieLibrary,console));
+        menuItems.add(new QuitMenu());
+        return menuItems;
+    }
 }

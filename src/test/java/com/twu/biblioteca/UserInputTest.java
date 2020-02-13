@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -18,7 +19,9 @@ class UserInputTest {
         console = mock(Console.class);
         bookLibrary = mock(BookLibrary.class);
         movieLibrary = mock(MovieLibrary.class);
-        userInput = new UserInput(bookLibrary, movieLibrary, console);
+        Default aDefault = new Default();
+        List<MenuItem> menuItems = aDefault.getMenuItems(bookLibrary,movieLibrary,console);
+        userInput = new UserInput(menuItems,console);
     }
 
     @Test
@@ -37,7 +40,7 @@ class UserInputTest {
 
     @Test
     void testShouldPrintAnMessageToUserForQuit() throws IOException {
-        when(console.readInteger()).thenReturn(5);
+        when(console.readInteger()).thenReturn(6);
         userInput.readInput();
         verify(console, times(1)).display("Thank you!");
     }

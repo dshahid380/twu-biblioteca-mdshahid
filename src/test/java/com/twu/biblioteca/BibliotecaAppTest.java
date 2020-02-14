@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -7,12 +8,26 @@ import java.io.IOException;
 import static org.mockito.Mockito.*;
 
 class BibliotecaAppTest {
+    Console console;
+    BibliotecaApp bibliotecaApp;
+    int DISPLAY_BOOKS = 1;
+    int CHECKOUT_BOOK = 2;
+    //int RETURN_BOOK = 3;
+    int DISPLAY_MOVIES = 4;
+    //int CHECKOUT_MOVIES =5;
+    int QUIT = 6;
+    int INVALID = 9;
+
+    @BeforeEach
+    void setUp() {
+        console = mock(Console.class);
+        bibliotecaApp = new BibliotecaApp(console);
+    }
 
     @Test
     public void testShouldPrintTheWelcomeMessage() throws IOException {
-        Console console = mock(Console.class);
-        when(console.readInteger()).thenReturn(1, 6);
-        BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
+        when(console.readInteger()).thenReturn(DISPLAY_BOOKS, QUIT);
+
         bibliotecaApp.start();
         verify(console).display("Welcome to Biblioteca. You one-stop-shop for great book titles in Bangalore!");
     }
@@ -20,7 +35,7 @@ class BibliotecaAppTest {
     @Test
     public void testShouldBeAbleToPrintAllAvailableBooks() throws IOException {
         Console console = mock(Console.class);
-        when(console.readInteger()).thenReturn(1, 6);
+        when(console.readInteger()).thenReturn(DISPLAY_BOOKS, QUIT);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
         bibliotecaApp.start();
@@ -33,7 +48,7 @@ class BibliotecaAppTest {
     @Test
     void testShouldPrintAllBooksDetailsWhenUserSelectListOfBooks() throws IOException {
         Console console = mock(Console.class);
-        when(console.readInteger()).thenReturn(1, 6);
+        when(console.readInteger()).thenReturn(DISPLAY_BOOKS, QUIT);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
         bibliotecaApp.start();
@@ -46,7 +61,7 @@ class BibliotecaAppTest {
     @Test
     void testShouldPrintInvalidOptionIfUserChooseInvalidOption() throws IOException {
         Console console = mock(Console.class);
-        when(console.readInteger()).thenReturn(7, 6);
+        when(console.readInteger()).thenReturn(INVALID, QUIT);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
         bibliotecaApp.start();
@@ -57,7 +72,7 @@ class BibliotecaAppTest {
     @Test
     void testShouldQuitTheApplicationWhenUserOptToQuit() throws IOException {
         Console console = mock(Console.class);
-        when(console.readInteger()).thenReturn(6);
+        when(console.readInteger()).thenReturn(QUIT);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
         bibliotecaApp.start();
@@ -68,7 +83,7 @@ class BibliotecaAppTest {
     @Test
     void testShouldCheckOutABookFromLibraryWhenUserCheckOut() throws IOException {
         Console console = mock(Console.class);
-        when(console.readInteger()).thenReturn(2, 1, 6);
+        when(console.readInteger()).thenReturn(CHECKOUT_BOOK, DISPLAY_BOOKS, QUIT);
         when(console.readBook()).thenReturn(new Book("Book1", "Author1", "1997"));
         BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
@@ -80,7 +95,7 @@ class BibliotecaAppTest {
     @Test
     void testShouldPrintAnMessageToUserWhenUserCheckOutABook() throws IOException {
         Console console = mock(Console.class);
-        when(console.readInteger()).thenReturn(2, 6);
+        when(console.readInteger()).thenReturn(CHECKOUT_BOOK, QUIT);
         when(console.readBook()).thenReturn(new Book("Book1", "Author1", "1997"));
         BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
@@ -91,7 +106,7 @@ class BibliotecaAppTest {
     @Test
     void testShouldNotifyWithAnMessageToUserWhenUserWantToCheckOutButBookNotAvailable() throws IOException {
         Console console = mock(Console.class);
-        when(console.readInteger()).thenReturn(2, 6);
+        when(console.readInteger()).thenReturn(CHECKOUT_BOOK, QUIT);
         when(console.readBook()).thenReturn(new Book("Book6", "Author6", "1997"));
         BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
@@ -102,7 +117,7 @@ class BibliotecaAppTest {
     @Test
     void testShouldDisplayListOfMovie() throws IOException {
         Console console = mock(Console.class);
-        when(console.readInteger()).thenReturn(4, 6);
+        when(console.readInteger()).thenReturn(DISPLAY_MOVIES, QUIT);
         BibliotecaApp bibliotecaApp = new BibliotecaApp(console);
 
         bibliotecaApp.start();
